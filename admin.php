@@ -1,56 +1,54 @@
 <?php
 session_start();
-include "connection.php";
-if (isset($_SESSION['admin'])) {
-	header("location: adminhome.php");
+if (isset($_POST['submit'])) {
+    $password = $_POST['password'];
+    if ($password == '123') {
+        $_SESSION['admin'] = true;
+        header("location: adminhome.php");
+    }
+    else {
+        echo  "<script> alert('wrong password');</script>";
+    }
 }
-if (isset($_POST['password']))  {
-	$password = mysqli_real_escape_string($conn , $_POST['password']);
-	$adminpass = '$2y$10$8WkSLFcoaqhJUJoqjg3K8eWixJWswsICf7FTxehKmx8hpmIKYWqju';
-	if (password_verify($password , $adminpass)) {
-		$_SESSION['admin'] = "active";
-		header("Location: adminhome.php");
-	}
-	else {
-		echo  "<script> alert('wrong password');</script>";
-	}
-}
-
-
 ?>
+
 
 
 
 <html>
 	<head>
-		<title>quiz-db</title>
+		<title>Quiz-db Admin</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 
 	<body>
-		<header>
-			<div class="container">
-				<h1>quiz-db</h1>
-				<a href="index.php" class="start">Home</a>
-
-			</div>
-		</header>
-
 		<main>
 		<div class="container">
-				<h2>Enter Password</h2>
-				<form method="POST" action="">
-				<input type="password" name="password" required="" >
-				<input type="submit" name="submit" value="send"> 
-
-			</div>
+				<div class="header-content">
+					<h1>Quiz-db</h1>
+					<div class="buttons">
+						<a href="index.php" class="start">Home</a>
+					</div>
+				</div>
+				<div class="admin-login">
+					<h2>Admin Login</h2>
+					<form method="POST" action="">
+						<p>
+							<label>Password</label>
+							<input type="password" name="password" required="">
+						</p>
+						<p>
+							<input type="submit" name="submit" value="Login" class="admin-btn">
+						</p>
+					</form>
+				</div>
 
 
 		</main>
 
 		<footer>
 			<div class="container">
-				Copyright @ quiz-db
+				Copyright @ Quiz-db
 			</div>
 		</footer>
 

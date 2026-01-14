@@ -1,85 +1,73 @@
-<?php session_start(); ?>
-<?php include "connection.php";
+<?php 
+session_start();
+include "connection.php";
 if (isset($_SESSION['admin'])) {
+
+if (isset($_GET['delete'])) {
+    $qid = $_GET['delete'];
+    $query = "DELETE FROM questions WHERE qid = '$qid'";
+    $run = mysqli_query($conn, $query) or die(mysqli_error($conn));
+    if (mysqli_affected_rows($conn) > 0) {
+        // Renumber qno after deletion
+        $query2 = "SET @num := 0; UPDATE questions SET qno = (@num := @num + 1) ORDER BY qid;";
+        mysqli_multi_query($conn, $query2);
+        echo "<script>alert('Question deleted successfully'); window.location.href='allquestions.php';</script>";
+    } else {
+        echo "<script>alert('Error deleting question');</script>";
+    }
+}
+
+$query = "SELECT * FROM questions ORDER BY qno";
+$run = mysqli_query($conn, $query) or die(mysqli_error($conn));
 ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>quiz-db</title>
+		<title>All Questions</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<link rel="stylesheet" type="text/css" href="css/style1.css">
 	</head>
-
 	<body>
-		<header>
+		<main>
 			<div class="container">
-				<h1>quiz-db</h1>
-				<a href="index.php" class="start">Home</a>
-				<a href="add.php" class="start">Add Question</a>
-				<a href="allquestions.php" class="start">All Questions</a>
-				<a href="players.php" class="start">Players</a>
-				<a href="exit.php" class="start">Logout</a>
-				
+				<div class="header-content">
+					<h1>All Questions</h1>
+					<div class="buttons">
+						<a href="adminhome.php" class="start">Dashboard</a>
+						<a href="add.php" class="start">Add Question</a>
+					</div>
+				</div>
+				<div class="admin-questions-list">
+					<h2>All Questions</h2>
+					<?php
+					while ($row = mysqli_fetch_array($run)) {
+						echo "<div class='question-item'>";
+						echo "<div class='question-header'>";
+						echo "<h3>Question " . $row['qno'] . "</h3>";
+						echo "<a href='allquestions.php?delete=" . $row['qid'] . "' class='delete-btn' onclick='return confirm(\"Are you sure you want to delete this question?\")'>Delete</a>";
+						echo "</div>";
+						echo "<div class='question-content'>";
+						echo "<p class='question-text'><strong>" . $row['question'] . "</strong></p>";
+						echo "<div class='choices'>";
+						echo "<p><span class='choice-label'>A:</span> " . $row['ans1'] . "</p>";
+						echo "<p><span class='choice-label'>B:</span> " . $row['ans2'] . "</p>";
+						echo "<p><span class='choice-label'>C:</span> " . $row['ans3'] . "</p>";
+						echo "<p><span class='choice-label'>D:</span> " . $row['ans4'] . "</p>";
+						echo "</div>";
+						echo "<p class='correct-answer'>Correct Answer: <strong>" . strtoupper($row['correct_answer']) . "</strong></p>";
+						echo "</div>";
+						echo "</div>";
+					}
+					?>
+				</div>
 			</div>
-		</header>
-
-		
-	<h1> All Questions</h1>
-	<table class="data-table">
-		<caption class="title">All kuiz questions</caption>
-		<thead>
-			<tr>
-				<th>Q.NO</th>
-				<th>Question</th>
-				<th>Option1</th>
-				<th>Option2</th>
-				<th>Option3</th>
-				<th>Option4</th>
-				<th>Correct Answer </th>
-				<th>Edit</th>
-			</tr>
-		</thead>
-		<tbody>
-        
-        <?php 
-            
-            $query = "SELECT * FROM questions ORDER BY qno DESC";
-            $select_questions = mysqli_query($conn, $query) or die(mysqli_error($conn));
-            if (mysqli_num_rows($select_questions) > 0 ) {
-            while ($row = mysqli_fetch_array($select_questions)) {
-                $qno = $row['qno'];
-                $question = $row['question'];
-                $option1 = $row['ans1'];
-                $option2 = $row['ans2'];
-                $option3 = $row['ans3'];
-                $option4 = $row['ans4'];
-                $Answer = $row['correct_answer'];
-                echo "<tr>";
-                echo "<td>$qno</td>";
-                echo "<td>$question</td>";
-                echo "<td>$option1</td>";
-                echo "<td>$option2</td>";
-                echo "<td>$option3</td>";
-                echo "<td>$option4</td>";
-                echo "<td>$Answer</td>";
-                echo "<td> <a href='editquestion.php?qno=$qno'> Edit </a></td>";
-              
-                echo "</tr>";
-             }
-         }
-        ?>
-	
-		</tbody>
-		
-	</table>
-</body>
+		</main>
+	</body>
 </html>
 
-<?php } 
+<?php 
+}
 else {
 	header("location: admin.php");
 }
 ?>
-
-
