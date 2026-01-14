@@ -15,7 +15,11 @@ if (isset($_SESSION['admin'])) {
 		<header>
 			<div class="container">
 				<h1>quiz-db</h1>
-				
+				<a href="index.php" class="start">Home</a>
+				<a href="add.php" class="start">Add Question</a>
+				<a href="allquestions.php" class="start">All Questions</a>
+				<a href="players.php" class="start">Players</a>
+				<a href="exit.php" class="start">Logout</a>
 				
 			</div>
 		</header>

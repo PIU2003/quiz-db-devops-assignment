@@ -8,7 +8,12 @@ if (isset($_SESSION['id'])) {
 }
 ?>
 <?php
-
+if (isset($_POST['email'])) {
+$email = mysqli_real_escape_string($conn , $_POST['email']);
+if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+	$checkmail = "SELECT * from users WHERE email = '$email'";
+	$runcheck = mysqli_query($conn , $checkmail) or die(mysqli_error($conn));
+	if (mysqli_num_rows($runcheck) > 0) {
 		$played_on = date('Y-m-d H:i:s');
 		$update = "UPDATE users SET played_on = '$played_on' WHERE email = '$email' ";
 		$runupdate = mysqli_query($conn , $update) or die(mysqli_error($conn));

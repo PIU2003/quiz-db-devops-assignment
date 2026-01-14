@@ -20,7 +20,11 @@ $total = mysqli_num_rows($run);
 			</div>
 		</header>
 
-		
+		<main>
+			<div class="container">
+				<h2>Welcome to PHP Kuiz !</h2>
+				<p>This is just a simple quiz game to test your knowledge!</p>
+				<ul>
 				    <li><strong>Number of questions: </strong><?php echo $total; ?></li>
 				    <li><strong>Type: </strong>Multiple Choice</li>
 				    <li><strong>Estimated time for each question: </strong><?php echo $total * 0.05 * 60; ?> seconds</li>

@@ -13,7 +13,11 @@ if (isset($_GET['qno'])) {
 		$run = mysqli_query($conn, $query) or die(mysqli_error($conn));
 		if (mysqli_num_rows($run) > 0) {
 			while ($row = mysqli_fetch_array($run)) {
-				
+				 $qno = $row['qno'];
+                 $question = $row['question'];
+                 $ans1 = $row['ans1'];
+                 $ans2 = $row['ans2'];
+                 $ans3 = $row['ans3'];
                  $ans4 = $row['ans4'];
                  $correct_answer = $row['correct_answer'];
 			}
