@@ -1,4 +1,14 @@
+<?php session_start(); ?>
+<?php include "connection.php";
+if (isset($_SESSION['admin'])) {
 
+if(isset($_POST['submit'])) {
+	$question =htmlentities(mysqli_real_escape_string($conn , $_POST['question']));
+	$choice1 = htmlentities(mysqli_real_escape_string($conn , $_POST['choice1']));
+	$choice2 = htmlentities(mysqli_real_escape_string($conn , $_POST['choice2']));
+	$choice3 = htmlentities(mysqli_real_escape_string($conn , $_POST['choice3']));
+	$choice4 = htmlentities(mysqli_real_escape_string($conn , $_POST['choice4']));
+	$correct_answer = mysqli_real_escape_string($conn , $_POST['answer']);
 
 
     $checkqsn = "SELECT * FROM questions";
