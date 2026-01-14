@@ -1,10 +1,10 @@
 body {
 	font-size: 15px;
-	color: #e0e0e0;
+	color: #333;
 	font-family: "Segoe UI", "Open Sans", Tahoma, Arial;
 	padding: 0;
 	margin: 0;
-	background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+	background: linear-gradient(135deg, #f5f5dc 0%, #a8dadc 100%);
 	min-height: 100vh;
 }
 
@@ -12,10 +12,10 @@ table {
 	margin: auto;
 	font-family: "Segoe UI", "Open Sans", Tahoma, Arial;
 	font-size: 13px;
-	background: rgba(15, 20, 40, 0.95);
+	background: rgba(255, 255, 255, 0.95);
 	border-radius: 8px;
 	overflow: hidden;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -23,7 +23,7 @@ h1 {
 	text-align: center;
 	text-transform: uppercase;
 	font-size: 24px;
-	color: #0099ff;
+	color: #dda0dd;
 	font-weight: 700;
 }
 
@@ -51,9 +51,9 @@ table td {
 
 /* Table Header */
 .data-table thead th {
-	background: linear-gradient(135deg, #0066cc 0%, #004999 100%);
+	background: linear-gradient(135deg, #dda0dd 0%, #ba55d3 100%);
 	color: #FFFFFF;
-	border-color: #0099ff !important;
+	border-color: #dda0dd !important;
 	text-transform: uppercase;
 	font-weight: 600;
 	letter-spacing: 0.5px;
@@ -61,7 +61,7 @@ table td {
 
 /* Table Body */
 .data-table tbody td {
-	color: #e0e0e0;
+	color: #333;
 }
 .data-table tbody td:first-child,
 .data-table tbody td:nth-child(4),
@@ -70,21 +70,21 @@ table td {
 }
 
 .data-table tbody tr:nth-child(odd) td {
-	background-color: #1a1f3a;
+	background-color: #f0f8ff;
 }
 
 .data-table tbody tr:hover td {
-	background-color: #2c3557;
-	border-color: #0099ff;
+	background-color: #e6e6fa;
+	border-color: #dda0dd;
 }
 
 /* Table Footer */
 .data-table tfoot th {
-	background-color: #0f1428;
+	background-color: #f5f5dc;
 	text-align: right;
-	border-color: #333;
+	border-color: #ccc;
 	font-weight: 600;
-	color: #e0e0e0;
+	color: #333;
 }
 .data-table tfoot th:first-child {
 	text-align: left;
@@ -92,5 +92,5 @@ table td {
 
 .data-table tbody td:empty
 {
-	background-color: #4d3333;
+	background-color: #ffe4e1;
 }
