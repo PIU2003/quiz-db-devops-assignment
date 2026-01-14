@@ -15,7 +15,14 @@ if (isset($_SESSION['id'])) {
 	        if (isset($_SESSION['quiz']) && $_SESSION['quiz'] == $qno) {
 			$query = "SELECT * FROM questions WHERE qno = '$qno'" ;
 			$run = mysqli_query($conn , $query) or die(mysqli_error($conn));
-			
+			if (mysqli_num_rows($run) > 0) {
+				$row = mysqli_fetch_array($run);
+				$qno = $row['qno'];
+                 $question = $row['question'];
+                 $ans1 = $row['ans1'];
+                 $ans2 = $row['ans2'];
+                 $ans3 = $row['ans3'];
+                 $ans4 = $row['ans4'];
                  $correct_answer = $row['correct_answer'];
                  $_SESSION['quiz'] = $qno;
                  $checkqsn = "SELECT * FROM questions" ;

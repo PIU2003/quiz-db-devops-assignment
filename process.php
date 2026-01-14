@@ -14,7 +14,9 @@ if (isset($_SESSION['id'])) {
     window.location.href='results.php';</script>";
 }
 else {
-        ] = $_SESSION['quiz'] + 1;
+        $_SESSION['start_time'] = $newtime;
+		$qno = $_POST['number'];
+        $_SESSION['quiz'] = $_SESSION['quiz'] + 1;
 		$selected_choice = $_POST['choice'];
 		$nextqno = $qno+1;
 
